@@ -53,7 +53,7 @@ namespace WebApi.Controllers
             if (usermodel != null)
             {
                 var existingUser = db.Users.Where(x => x.Username == usermodel.Username).ToList();     // checking if username already exists in the database as it is a unique
-                if (existingUser.Count == 0)    // this username is not present in database, god to add it
+                if (existingUser.Count == 0)    // this username is not present in database, good to add it
                 {
                     user.Name = usermodel.Name;
                     user.Username = usermodel.Username;
@@ -216,21 +216,6 @@ namespace WebApi.Controllers
                 }
                 return userList;
             }
-            //var users = db.Users.Select(x => new { x.Latitude, x.Longitude, x.Name }).ToList();
-            //if (users.Count > 0)
-            //{
-            //    for (int i = 0; i < users.Count; i++)
-            //    {
-            //        double lat2 = users[i].Latitude;
-            //        double lng2 = users[i].Longitude;
-            //        double distance = GetDistanceFromLatLonInKm(lat1, lat2, lng1, lng2);
-            //        if (distance <= measure)
-            //        {
-            //            usersList.Add(users[i].Name);
-            //        }
-            //    }
-            //    return usersList;
-            //}
             return userList;
         }
 
@@ -260,39 +245,81 @@ namespace WebApi.Controllers
             AuthResponseModel model = new AuthResponseModel { isSuccess = false };
             JobRequest request = new JobRequest();
             List<User> usersList = new List<User>();
-            imageString = imageString.Replace(' ', '+');
+            
             usersList= FindUsersWithinRangeAndService(lat, lng, range,userEmail,serviceId);
-            if (usersList.Count > 0)
+
+            var userId = db.Users.Where(x => x.Username == userEmail).Select(x => new {x.Id});
+            var firstOrDefault = userId.FirstOrDefault();
+            if (firstOrDefault != null) 
             {
-                //Image img = ConvertToImage(imageString);
-                byte[] contents = Convert.FromBase64String(imageString);
-                string subpath = "~/Images";
-                bool exists = System.IO.Directory.Exists(HttpContext.Current.Server.MapPath(subpath));
+                int currentUserId = Convert.ToInt32(firstOrDefault.Id);
 
-                if (!exists)
+                if (usersList.Count > 0)
                 {
-                    System.IO.Directory.CreateDirectory(HttpContext.Current.Server.MapPath(subpath));
+                
+                    imageString = imageString.Replace(" ", "+");   // original string cometimes contains '+' 
+                    byte[] contents = Convert.FromBase64String(imageString.Trim('\0'));    
+                    //byte[] contents = ConvertToBytes(imageString);
+                
+                    string subpath = "~/Images";
+                    bool exists = Directory.Exists(HttpContext.Current.Server.MapPath(subpath));
+
+                    if (!exists)
+                    {
+                        Directory.CreateDirectory(HttpContext.Current.Server.MapPath(subpath));
+                    }
+                    string fileName = "Image" + DateTime.Now.TimeOfDay + ".png";
+                    var savePath = HttpContext.Current.Server.MapPath(subpath);
+                    var imagePath = Path.Combine(savePath, Path.GetFileName(fileName));
+                    File.WriteAllBytes(imagePath, contents);
+
+                    request.ServiceTypeId = serviceId;
+                    request.ImagePath = imagePath;
+                    request.RequestUserId = currentUserId;
+                    db.JobRequests.Add(request);
+                    db.SaveChanges();
+
+                    model.isSuccess = true;
                 }
-                string fileName = "Image" + DateTime.Now.Date + ".png";
-                var savePath = HttpContext.Current.Server.MapPath(subpath);
-                var path = Path.Combine(savePath, Path.GetFileName(fileName));
-
-                System.IO.File.WriteAllBytes(path, contents);
-
-                model.isSuccess = true;
+                else
+                {
+                    model.isSuccess = false;
+                    model.message = "An error occurred";
+                }
             }
             return model;
         }
 
-        public System.Drawing.Image ConvertToImage(string str)
+        public byte[] ConvertToBytes(string imageString)
         {
-            byte[] imageBytes = Convert.FromBase64String(str);
-            MemoryStream ms = new MemoryStream(imageBytes, 0, imageBytes.Length);
-            ms.Write(imageBytes, 0, imageBytes.Length);
-            System.Drawing.Image image = System.Drawing.Image.FromStream(ms, true);
-            return image;
-        } 
-        
+            if (string.IsNullOrEmpty(imageString))
+            {
+                return null;
+            }
+
+            int firtsAppearingCommaIndex = imageString.IndexOf(',');
+
+            if (firtsAppearingCommaIndex < 0)
+            {
+                return null;
+            }
+
+            if (imageString.Length < firtsAppearingCommaIndex + 1)
+            {
+                return null;
+            }
+
+            string sourceSubString = imageString.Substring(firtsAppearingCommaIndex + 1);
+
+            try
+            {
+                return Convert.FromBase64String(sourceSubString.Trim('\0'));
+            }
+            catch (FormatException)
+            {
+                return null;
+            }
+        }
         // POST api/values
         public void Post([FromBody]string value)
         {
