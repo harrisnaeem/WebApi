@@ -1,0 +1,9 @@
+﻿MyProduct    (Android appliaction)
+Server key (auto created by Google Service , GCM)= AIzaSyAJQ7S4SPJlBnIK9sJk1laHAIvbWUf2r3E
+
+Android key (auto created by Google Service) = AIzaSyDDrU1tzMfQTvhujeZGsCYf0uJId7_ki8Y (not being used at the moment)
+
+WebApi       (.NET web Api)
+google map matrix api key = AIzaSyBd_nVfEOscouHG6AOssfeK04e3LvTWewo (not being used at the moment)
+
+geocoding key = AIzaSyBd_nVfEOscouHG6AOssfeK04e3LvTWewo    (not being used at the moment)

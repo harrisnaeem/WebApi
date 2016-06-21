@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <parameters>
   <parameter name="LocationAppDbEntities-Web.config Connection String" description="LocationAppDbEntities Connection String used in web.config by the application to access the database." defaultValue="metadata=res://*/Models.Model1.csdl|res://*/Models.Model1.ssdl|res://*/Models.Model1.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=locationappapi.database.windows.net;initial catalog=LocationAppDb;user id=harris;password=H@rr!s914;MultipleActiveResultSets=True;App=EntityFramework&quot;" tags="SqlConnectionString">
-    <parameterEntry kind="XmlFile" scope="C:\\Users\\bcm\\Documents\\Visual\ Studio\ 2013\\Projects\\WebApi\\WebApi\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='LocationAppDbEntities']/@connectionString" />
+    <parameterEntry kind="XmlFile" scope="D:\\GitHub\\WebApi\\WebApi\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='LocationAppDbEntities']/@connectionString" />
   </parameter>
 </parameters>

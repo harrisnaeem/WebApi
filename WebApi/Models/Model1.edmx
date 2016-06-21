@@ -15,15 +15,6 @@
           <Property Name="ImagePath" Type="nvarchar(max)" />
           <Property Name="Status" Type="varchar" MaxLength="50" />
         </EntityType>
-        <EntityType Name="Locations">
-          <Key>
-            <PropertyRef Name="LocId" />
-          </Key>
-          <Property Name="LocId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Latitude" Type="float" />
-          <Property Name="Longitude" Type="float" />
-          <Property Name="Name" Type="nvarchar" MaxLength="50" />
-        </EntityType>
         <EntityType Name="Service">
           <Key>
             <PropertyRef Name="Id" />
@@ -43,15 +34,16 @@
           <Property Name="Contact" Type="nvarchar" MaxLength="50" />
           <Property Name="Latitude" Type="float" Nullable="false" />
           <Property Name="Longitude" Type="float" Nullable="false" />
-          <Property Name="Region" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Region" Type="nvarchar" MaxLength="50" />
           <Property Name="ServiceId" Type="int" Nullable="false" />
           <Property Name="City" Type="nvarchar" MaxLength="100" />
           <Property Name="Country" Type="nvarchar" MaxLength="100" />
           <Property Name="TimeFrom" Type="time" Precision="7" />
           <Property Name="TimeTo" Type="time" Precision="7" />
           <Property Name="ImageUrl" Type="nvarchar(max)" />
+          <Property Name="DeviceId" Type="nvarchar(max)" />
         </EntityType>
-        <Association Name="FK__User__ServiceId__25869641">
+        <Association Name="FK__User__ServiceId__45F365D3">
           <End Role="Service" Type="Self.Service" Multiplicity="1" />
           <End Role="User" Type="Self.User" Multiplicity="*" />
           <ReferentialConstraint>
@@ -89,10 +81,9 @@
         </Association>
         <EntityContainer Name="LocationAppDbModelStoreContainer">
           <EntitySet Name="JobRequest" EntityType="Self.JobRequest" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Locations" EntityType="Self.Locations" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Service" EntityType="Self.Service" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__User__ServiceId__25869641" Association="Self.FK__User__ServiceId__25869641">
+          <AssociationSet Name="FK__User__ServiceId__45F365D3" Association="Self.FK__User__ServiceId__45F365D3">
             <End Role="Service" EntitySet="Service" />
             <End Role="User" EntitySet="User" />
           </AssociationSet>
@@ -109,15 +100,6 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="LocationAppDbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="Location">
-          <Key>
-            <PropertyRef Name="LocId" />
-          </Key>
-          <Property Name="LocId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Latitude" Type="Double" />
-          <Property Name="Longitude" Type="Double" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-        </EntityType>
         <EntityType Name="User">
           <Key>
             <PropertyRef Name="Id" />
@@ -130,7 +112,7 @@
           <Property Name="Contact" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Latitude" Type="Double" Nullable="false" />
           <Property Name="Longitude" Type="Double" Nullable="false" />
-          <Property Name="Region" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Region" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ServiceId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Service" Relationship="LocationAppDbModel.FK__User__ServiceId__45F365D3" FromRole="User" ToRole="Service" />
           <Property Name="City" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
@@ -139,9 +121,9 @@
           <Property Name="TimeTo" Type="Time" Precision="7" />
           <Property Name="ImageUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="JobRequests" Relationship="LocationAppDbModel.FK_JobRequest_User" FromRole="User" ToRole="JobRequest" />
+          <Property Name="DeviceId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityContainer Name="LocationAppDbEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Locations" EntityType="Self.Location" />
           <EntitySet Name="Users" EntityType="Self.User" />
           <EntitySet Name="Services" EntityType="LocationAppDbModel.Service" />
           <AssociationSet Name="FK__User__ServiceId__45F365D3" Association="LocationAppDbModel.FK__User__ServiceId__45F365D3">
@@ -221,19 +203,10 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="LocationAppDbModelStoreContainer" CdmEntityContainer="LocationAppDbEntities">
-          <EntitySetMapping Name="Locations">
-            <EntityTypeMapping TypeName="LocationAppDbModel.Location">
-              <MappingFragment StoreEntitySet="Locations">
-                <ScalarProperty Name="LocId" ColumnName="LocId" />
-                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
-                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="LocationAppDbModel.User">
               <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="DeviceId" ColumnName="DeviceId" />
                 <ScalarProperty Name="ImageUrl" ColumnName="ImageUrl" />
                 <ScalarProperty Name="TimeTo" ColumnName="TimeTo" />
                 <ScalarProperty Name="TimeFrom" ColumnName="TimeFrom" />

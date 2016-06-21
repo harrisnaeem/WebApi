@@ -25,7 +25,6 @@ namespace WebApi.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public DbSet<Location> Locations { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Service> Services { get; set; }
         public DbSet<JobRequest> JobRequests { get; set; }

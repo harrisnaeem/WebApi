@@ -32,3 +32,37 @@ C:\Users\bcm\Documents\Visual Studio 2013\Projects\WebApi\WebApi\bin\Antlr3.Runt
 C:\Users\bcm\Documents\Visual Studio 2013\Projects\WebApi\WebApi\obj\Release\WebApi.csprojResolveAssemblyReference.cache
 C:\Users\bcm\Documents\Visual Studio 2013\Projects\WebApi\WebApi\obj\Release\WebApi.dll
 C:\Users\bcm\Documents\Visual Studio 2013\Projects\WebApi\WebApi\obj\Release\WebApi.pdb
+D:\GitHub\WebApi\WebApi\bin\WebApi.dll.config
+D:\GitHub\WebApi\WebApi\bin\WebApi.dll
+D:\GitHub\WebApi\WebApi\bin\WebApi.pdb
+D:\GitHub\WebApi\WebApi\bin\Antlr3.Runtime.dll
+D:\GitHub\WebApi\WebApi\bin\EntityFramework.dll
+D:\GitHub\WebApi\WebApi\bin\Microsoft.Web.Infrastructure.dll
+D:\GitHub\WebApi\WebApi\bin\Newtonsoft.Json.dll
+D:\GitHub\WebApi\WebApi\bin\System.Net.Http.Formatting.dll
+D:\GitHub\WebApi\WebApi\bin\System.Web.Helpers.dll
+D:\GitHub\WebApi\WebApi\bin\System.Web.Http.dll
+D:\GitHub\WebApi\WebApi\bin\System.Web.Http.WebHost.dll
+D:\GitHub\WebApi\WebApi\bin\System.Web.Mvc.dll
+D:\GitHub\WebApi\WebApi\bin\System.Web.Optimization.dll
+D:\GitHub\WebApi\WebApi\bin\System.Web.Razor.dll
+D:\GitHub\WebApi\WebApi\bin\System.Web.WebPages.Deployment.dll
+D:\GitHub\WebApi\WebApi\bin\System.Web.WebPages.dll
+D:\GitHub\WebApi\WebApi\bin\System.Web.WebPages.Razor.dll
+D:\GitHub\WebApi\WebApi\bin\WebGrease.dll
+D:\GitHub\WebApi\WebApi\bin\EntityFramework.xml
+D:\GitHub\WebApi\WebApi\bin\Newtonsoft.Json.xml
+D:\GitHub\WebApi\WebApi\bin\System.Net.Http.Formatting.xml
+D:\GitHub\WebApi\WebApi\bin\System.Web.Helpers.xml
+D:\GitHub\WebApi\WebApi\bin\System.Web.Http.xml
+D:\GitHub\WebApi\WebApi\bin\System.Web.Http.WebHost.xml
+D:\GitHub\WebApi\WebApi\bin\System.Web.Mvc.xml
+D:\GitHub\WebApi\WebApi\bin\System.Web.Razor.xml
+D:\GitHub\WebApi\WebApi\bin\System.Web.WebPages.xml
+D:\GitHub\WebApi\WebApi\bin\System.Web.WebPages.Deployment.xml
+D:\GitHub\WebApi\WebApi\bin\System.Web.WebPages.Razor.xml
+D:\GitHub\WebApi\WebApi\bin\System.Web.Optimization.xml
+D:\GitHub\WebApi\WebApi\bin\Antlr3.Runtime.pdb
+D:\GitHub\WebApi\WebApi\obj\Release\WebApi.csprojResolveAssemblyReference.cache
+D:\GitHub\WebApi\WebApi\obj\Release\WebApi.dll
+D:\GitHub\WebApi\WebApi\obj\Release\WebApi.pdb

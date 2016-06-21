@@ -34,6 +34,7 @@ namespace WebApi.Models
         public Nullable<System.TimeSpan> TimeFrom { get; set; }
         public Nullable<System.TimeSpan> TimeTo { get; set; }
         public string ImageUrl { get; set; }
+        public string DeviceId { get; set; }
     
         public virtual Service Service { get; set; }
         public virtual ICollection<JobRequest> JobRequests { get; set; }

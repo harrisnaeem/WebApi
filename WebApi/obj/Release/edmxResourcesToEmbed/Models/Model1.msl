@@ -1,19 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="LocationAppDbModelStoreContainer" CdmEntityContainer="LocationAppDbEntities">
-    <EntitySetMapping Name="Locations">
-      <EntityTypeMapping TypeName="LocationAppDbModel.Location">
-        <MappingFragment StoreEntitySet="Locations">
-          <ScalarProperty Name="LocId" ColumnName="LocId" />
-          <ScalarProperty Name="Latitude" ColumnName="Latitude" />
-          <ScalarProperty Name="Longitude" ColumnName="Longitude" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Users">
       <EntityTypeMapping TypeName="LocationAppDbModel.User">
         <MappingFragment StoreEntitySet="User">
+          <ScalarProperty Name="DeviceId" ColumnName="DeviceId" />
           <ScalarProperty Name="ImageUrl" ColumnName="ImageUrl" />
           <ScalarProperty Name="TimeTo" ColumnName="TimeTo" />
           <ScalarProperty Name="TimeFrom" ColumnName="TimeFrom" />

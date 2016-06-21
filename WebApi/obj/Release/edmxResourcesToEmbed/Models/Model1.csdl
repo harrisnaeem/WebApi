@@ -1,14 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="LocationAppDbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-  <EntityType Name="Location">
-    <Key>
-      <PropertyRef Name="LocId" />
-    </Key>
-    <Property Name="LocId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Latitude" Type="Double" />
-    <Property Name="Longitude" Type="Double" />
-    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-  </EntityType>
   <EntityType Name="User">
     <Key>
       <PropertyRef Name="Id" />
@@ -21,7 +12,7 @@
     <Property Name="Contact" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Latitude" Type="Double" Nullable="false" />
     <Property Name="Longitude" Type="Double" Nullable="false" />
-    <Property Name="Region" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Region" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="ServiceId" Type="Int32" Nullable="false" />
     <NavigationProperty Name="Service" Relationship="LocationAppDbModel.FK__User__ServiceId__45F365D3" FromRole="User" ToRole="Service" />
     <Property Name="City" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
@@ -30,9 +21,9 @@
     <Property Name="TimeTo" Type="Time" Precision="7" />
     <Property Name="ImageUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="JobRequests" Relationship="LocationAppDbModel.FK_JobRequest_User" FromRole="User" ToRole="JobRequest" />
+    <Property Name="DeviceId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityContainer Name="LocationAppDbEntities" annotation:LazyLoadingEnabled="true">
-    <EntitySet Name="Locations" EntityType="Self.Location" />
     <EntitySet Name="Users" EntityType="Self.User" />
     <EntitySet Name="Services" EntityType="LocationAppDbModel.Service" />
     <AssociationSet Name="FK__User__ServiceId__45F365D3" Association="LocationAppDbModel.FK__User__ServiceId__45F365D3">

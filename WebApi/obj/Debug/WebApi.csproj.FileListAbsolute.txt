@@ -63,6 +63,6 @@ D:\GitHub\WebApi\WebApi\bin\System.Web.WebPages.Deployment.xml
 D:\GitHub\WebApi\WebApi\bin\System.Web.WebPages.Razor.xml
 D:\GitHub\WebApi\WebApi\bin\System.Web.Optimization.xml
 D:\GitHub\WebApi\WebApi\bin\Antlr3.Runtime.pdb
-D:\GitHub\WebApi\WebApi\obj\Debug\WebApi.csprojResolveAssemblyReference.cache
 D:\GitHub\WebApi\WebApi\obj\Debug\WebApi.dll
 D:\GitHub\WebApi\WebApi\obj\Debug\WebApi.pdb
+D:\GitHub\WebApi\WebApi\obj\Debug\WebApi.csprojResolveAssemblyReference.cache
