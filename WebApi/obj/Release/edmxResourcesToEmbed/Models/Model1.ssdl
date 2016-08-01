@@ -8,7 +8,8 @@
     <Property Name="ServiceTypeId" Type="int" />
     <Property Name="RequestUserId" Type="int" />
     <Property Name="ImagePath" Type="nvarchar(max)" />
-    <Property Name="Status" Type="varchar" MaxLength="50" />
+    <Property Name="RequestDate" Type="date" />
+    <Property Name="Description" Type="nvarchar(max)" />
   </EntityType>
   <EntityType Name="Service">
     <Key>
@@ -29,27 +30,24 @@
     <Property Name="Contact" Type="nvarchar" MaxLength="50" />
     <Property Name="Latitude" Type="float" Nullable="false" />
     <Property Name="Longitude" Type="float" Nullable="false" />
-    <Property Name="Region" Type="nvarchar" MaxLength="50" />
-    <Property Name="ServiceId" Type="int" Nullable="false" />
+    <Property Name="Region" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="City" Type="nvarchar" MaxLength="100" />
     <Property Name="Country" Type="nvarchar" MaxLength="100" />
     <Property Name="TimeFrom" Type="time" Precision="7" />
     <Property Name="TimeTo" Type="time" Precision="7" />
     <Property Name="ImageUrl" Type="nvarchar(max)" />
     <Property Name="DeviceId" Type="nvarchar(max)" />
+    <Property Name="HourlyRate" Type="float" />
+    <Property Name="Status" Type="nvarchar" MaxLength="20" />
   </EntityType>
-  <Association Name="FK__User__ServiceId__45F365D3">
-    <End Role="Service" Type="Self.Service" Multiplicity="1" />
-    <End Role="User" Type="Self.User" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Service">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="User">
-        <PropertyRef Name="ServiceId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
+  <EntityType Name="UserService">
+    <Key>
+      <PropertyRef Name="ServiceId" />
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="ServiceId" Type="int" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+  </EntityType>
   <Association Name="FK_JobRequest_Service">
     <End Role="Service" Type="Self.Service" Multiplicity="0..1" />
     <End Role="JobRequest" Type="Self.JobRequest" Multiplicity="*" />
@@ -74,14 +72,35 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_UserService_Service">
+    <End Role="Service" Type="Self.Service" Multiplicity="1" />
+    <End Role="UserService" Type="Self.UserService" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Service">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserService">
+        <PropertyRef Name="ServiceId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserService_User">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="UserService" Type="Self.UserService" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserService">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <EntityContainer Name="LocationAppDbModelStoreContainer">
     <EntitySet Name="JobRequest" EntityType="Self.JobRequest" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Service" EntityType="Self.Service" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
-    <AssociationSet Name="FK__User__ServiceId__45F365D3" Association="Self.FK__User__ServiceId__45F365D3">
-      <End Role="Service" EntitySet="Service" />
-      <End Role="User" EntitySet="User" />
-    </AssociationSet>
+    <EntitySet Name="UserService" EntityType="Self.UserService" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK_JobRequest_Service" Association="Self.FK_JobRequest_Service">
       <End Role="Service" EntitySet="Service" />
       <End Role="JobRequest" EntitySet="JobRequest" />
@@ -89,6 +108,14 @@
     <AssociationSet Name="FK_JobRequest_User" Association="Self.FK_JobRequest_User">
       <End Role="User" EntitySet="User" />
       <End Role="JobRequest" EntitySet="JobRequest" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserService_Service" Association="Self.FK_UserService_Service">
+      <End Role="Service" EntitySet="Service" />
+      <End Role="UserService" EntitySet="UserService" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserService_User" Association="Self.FK_UserService_User">
+      <End Role="User" EntitySet="User" />
+      <End Role="UserService" EntitySet="UserService" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

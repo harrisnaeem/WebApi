@@ -18,7 +18,8 @@ namespace WebApi.Models
         public Nullable<int> ServiceTypeId { get; set; }
         public Nullable<int> RequestUserId { get; set; }
         public string ImagePath { get; set; }
-        public string Status { get; set; }
+        public Nullable<System.DateTime> RequestDate { get; set; }
+        public string Description { get; set; }
     
         public virtual Service Service { get; set; }
         public virtual User User { get; set; }

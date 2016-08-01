@@ -23,7 +23,12 @@ namespace WebApi.ModelMappers
                 Longitude = source.Longitude,
                 Region = source.Region,
                 Password = source.Password,
-                ImageUrl = source.ImageUrl
+                ImageUrl = source.ImageUrl,
+                TimeFrom = source.TimeFrom,
+                TimeTo = source.TimeTo,
+                Services = source.Services.Select(x=>x.CreateFrom()).ToList(),
+                HourlyRate = source.HourlyRate,
+                
             };
         }
     }

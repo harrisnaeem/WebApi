@@ -1,43 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="LocationAppDbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-  <EntityType Name="User">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="Age" Type="Int32" />
-    <Property Name="Contact" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Latitude" Type="Double" Nullable="false" />
-    <Property Name="Longitude" Type="Double" Nullable="false" />
-    <Property Name="Region" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="ServiceId" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="Service" Relationship="LocationAppDbModel.FK__User__ServiceId__45F365D3" FromRole="User" ToRole="Service" />
-    <Property Name="City" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-    <Property Name="Country" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-    <Property Name="TimeFrom" Type="Time" Precision="7" />
-    <Property Name="TimeTo" Type="Time" Precision="7" />
-    <Property Name="ImageUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="JobRequests" Relationship="LocationAppDbModel.FK_JobRequest_User" FromRole="User" ToRole="JobRequest" />
-    <Property Name="DeviceId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-  </EntityType>
   <EntityContainer Name="LocationAppDbEntities" annotation:LazyLoadingEnabled="true">
-    <EntitySet Name="Users" EntityType="Self.User" />
     <EntitySet Name="Services" EntityType="LocationAppDbModel.Service" />
-    <AssociationSet Name="FK__User__ServiceId__45F365D3" Association="LocationAppDbModel.FK__User__ServiceId__45F365D3">
-      <End Role="Service" EntitySet="Services" />
-      <End Role="User" EntitySet="Users" />
-    </AssociationSet>
     <EntitySet Name="JobRequests" EntityType="LocationAppDbModel.JobRequest" />
     <AssociationSet Name="FK_JobRequest_Service" Association="LocationAppDbModel.FK_JobRequest_Service">
       <End Role="Service" EntitySet="Services" />
       <End Role="JobRequest" EntitySet="JobRequests" />
     </AssociationSet>
+    <EntitySet Name="Users" EntityType="LocationAppDbModel.User" />
     <AssociationSet Name="FK_JobRequest_User" Association="LocationAppDbModel.FK_JobRequest_User">
       <End Role="User" EntitySet="Users" />
       <End Role="JobRequest" EntitySet="JobRequests" />
+    </AssociationSet>
+    <AssociationSet Name="UserService" Association="LocationAppDbModel.UserService">
+      <End Role="Service" EntitySet="Services" />
+      <End Role="User" EntitySet="Users" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="Service">
@@ -46,21 +23,9 @@
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="ServiceName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="Users" Relationship="LocationAppDbModel.FK__User__ServiceId__45F365D3" FromRole="Service" ToRole="User" />
     <NavigationProperty Name="JobRequests" Relationship="LocationAppDbModel.FK_JobRequest_Service" FromRole="Service" ToRole="JobRequest" />
+    <NavigationProperty Name="Users" Relationship="LocationAppDbModel.UserService" FromRole="Service" ToRole="User" />
   </EntityType>
-  <Association Name="FK__User__ServiceId__45F365D3">
-    <End Type="LocationAppDbModel.Service" Role="Service" Multiplicity="1" />
-    <End Type="LocationAppDbModel.User" Role="User" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Service">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="User">
-        <PropertyRef Name="ServiceId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <EntityType Name="JobRequest">
     <Key>
       <PropertyRef Name="RequestId" />
@@ -69,8 +34,9 @@
     <Property Name="ServiceTypeId" Type="Int32" />
     <Property Name="RequestUserId" Type="Int32" />
     <Property Name="ImagePath" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="Service" Relationship="LocationAppDbModel.FK_JobRequest_Service" FromRole="JobRequest" ToRole="Service" />
+    <Property Name="RequestDate" Type="DateTime" Precision="0" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="User" Relationship="LocationAppDbModel.FK_JobRequest_User" FromRole="JobRequest" ToRole="User" />
   </EntityType>
   <Association Name="FK_JobRequest_Service">
@@ -85,6 +51,30 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Age" Type="Int32" />
+    <Property Name="Username" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Contact" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Latitude" Type="Double" Nullable="false" />
+    <Property Name="Longitude" Type="Double" Nullable="false" />
+    <Property Name="Region" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="City" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Country" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="TimeFrom" Type="Time" Precision="7" />
+    <Property Name="TimeTo" Type="Time" Precision="7" />
+    <Property Name="ImageUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DeviceId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="JobRequests" Relationship="LocationAppDbModel.FK_JobRequest_User" FromRole="User" ToRole="JobRequest" />
+    <Property Name="HourlyRate" Type="Double" />
+    <NavigationProperty Name="Services" Relationship="LocationAppDbModel.UserService" FromRole="User" ToRole="Service" />
+    <Property Name="Status" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+  </EntityType>
   <Association Name="FK_JobRequest_User">
     <End Type="LocationAppDbModel.User" Role="User" Multiplicity="0..1" />
     <End Type="LocationAppDbModel.JobRequest" Role="JobRequest" Multiplicity="*" />
@@ -96,5 +86,9 @@
         <PropertyRef Name="RequestUserId" />
       </Dependent>
     </ReferentialConstraint>
+  </Association>
+  <Association Name="UserService">
+    <End Type="LocationAppDbModel.Service" Role="Service" Multiplicity="*" />
+    <End Type="LocationAppDbModel.User" Role="User" Multiplicity="*" />
   </Association>
 </Schema>

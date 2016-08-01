@@ -160,6 +160,8 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
+    <Compile Include="ModelMappers\JobRequestMapper.cs" />
+    <Compile Include="ModelMappers\ServiceMapper.cs" />
     <Compile Include="ModelMappers\UserMapper.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -190,10 +192,15 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RequestResponseModels\AuthResponseModel.cs" />
+    <Compile Include="RequestResponseModels\JobRequestModel.cs" />
     <Compile Include="RequestResponseModels\LocationDetails.cs" />
     <Compile Include="RequestResponseModels\LoginModel.cs" />
     <Compile Include="RequestResponseModels\SaveJobRequestModel.cs" />
     <Compile Include="RequestResponseModels\UserListModel.cs" />
+    <Compile Include="RequestResponseModels\UserRequestModel.cs" />
+    <Compile Include="RequestResponseModels\UserResponseModel.cs" />
+    <Compile Include="WebModels\JobRequest.cs" />
+    <Compile Include="WebModels\Service.cs" />
     <Compile Include="WebModels\User.cs" />
   </ItemGroup>
   <ItemGroup>

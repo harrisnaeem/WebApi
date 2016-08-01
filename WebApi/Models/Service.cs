@@ -16,14 +16,14 @@ namespace WebApi.Models
     {
         public Service()
         {
-            this.Users = new HashSet<User>();
             this.JobRequests = new HashSet<JobRequest>();
+            this.Users = new HashSet<User>();
         }
     
         public int Id { get; set; }
         public string ServiceName { get; set; }
     
-        public virtual ICollection<User> Users { get; set; }
         public virtual ICollection<JobRequest> JobRequests { get; set; }
+        public virtual ICollection<User> Users { get; set; }
     }
 }

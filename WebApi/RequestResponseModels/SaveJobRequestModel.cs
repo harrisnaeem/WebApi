@@ -12,6 +12,8 @@ namespace WebApi.RequestResponseModels
         public double range { get; set; }
         public string timeFrom { get; set; }
         public string timeTo { get; set; }
+        public string description { get; set; }
+        public string postDate { get; set; }
         public bool autoContact { get; set; }
     }
 }

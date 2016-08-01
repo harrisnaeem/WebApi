@@ -5,13 +5,13 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="2830b02c453b4e7383ca41726857d06b" Name="Diagram1">
-        <EntityTypeShape EntityType="LocationAppDbModel.User" Width="1.5" PointX="4.75" PointY="0.5" IsExpanded="true" />
         <EntityTypeShape EntityType="LocationAppDbModel.Service" Width="1.5" PointX="0.625" PointY="0.5" />
-        <AssociationConnector Association="LocationAppDbModel.FK__User__ServiceId__45F365D3" />
-        <EntityTypeShape EntityType="LocationAppDbModel.JobRequest" Width="1.5" PointX="1.75" PointY="2.875" />
+        <EntityTypeShape EntityType="LocationAppDbModel.JobRequest" Width="1.5" PointX="4.25" PointY="2.125" />
         <AssociationConnector Association="LocationAppDbModel.FK_JobRequest_Service" />
+        <EntityTypeShape EntityType="LocationAppDbModel.User" Width="1.5" PointX="8.5" PointY="0.5" />
         <AssociationConnector Association="LocationAppDbModel.FK_JobRequest_User" />
-      </Diagram>
+        <AssociationConnector Association="LocationAppDbModel.UserService" />
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>
